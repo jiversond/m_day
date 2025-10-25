@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Michelle 🎀</title>
+  <style>
+    :root {
+      --pink: #ff77b6;
+      --light-pink: #ffeaf3;
+      --accent: #ff4da6;
+      --white: #fff;
+      --shadow: 0 8px 20px rgba(255, 77, 166, 0.12);
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    * { box-sizing: border-box }
+    body { margin: 0; background: linear-gradient(180deg, var(--light-pink), #fff); color: #333 }
+    .container { max-width: 980px; margin: 32px auto; padding: 24px }
+
+    /* Card */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    h1.title { font-size: 34px; margin: 0 0 8px; color: var(--accent) }
+    p.lead { margin: 0 0 18px; font-size: 16px; color: #6b3c4f }
+
+    .gif-wrap {
+      width: 320px;
+      height: 320px;
+      margin: 12px auto;
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fff, #ffeaf7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px dashed rgba(255, 77, 166, 0.12);
+    }
+
+    .gif-wrap img { max-width: 100%; height: 100%; object-fit: cover }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 0;
+      background: linear-gradient(90deg, var(--pink), var(--accent));
+      color: var(--white);
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(255, 77, 166, 0.18);
+      transition: transform 0.14s ease;
+    }
+
+    .btn:active { transform: translateY(2px) }
+    .muted { color: #a86f87; font-size: 14px }
+
+    .page { display: none }
+    .page.active { display: block }
+
+    /* Letter */
+    .letter-card {
+      max-width: 720px;
+      margin: 14px auto;
+      padding: 18px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fff, #fff8fb);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .letter-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stamp {
+      width: 180px;
+      height: 180px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 3px solid rgba(255, 77, 166, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stamp img { width: 100%; height: 100%; object-fit: cover }
+
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Cry area */
+    .cry-area { margin-top: 20px; text-align: center }
+    .cry-gif {
+      width: 480px;
+      max-width: 100%;
+      height: 260px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .cry-gif img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .small-note { font-size: 14px; color: #a75c84 }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal {
+      background: linear-gradient(180deg, #fff, #fff9fb);
+      border-radius: 14px;
+      max-width: 760px;
+      width: 100%;
+      padding: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    .modal h2 { margin: 0 0 8px; color: var(--accent) }
+    .modal .modal-body { max-height: 420px; overflow: auto; padding-right: 8px }
+    .modal .close-x {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      background: #fff;
+      border: 0;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .checkbox-row { display: flex; align-items: center; gap: 12px; padding: 12px 0 }
+    .collect-btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 0;
+      background: #f3c2db;
+      color: #fff;
+      font-weight: 700;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .collect-btn.enabled {
+      background: linear-gradient(90deg, var(--pink), var(--accent));
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    /* Cake page */
+    .cake-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 22px;
+    }
+
+    .video-wrap {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 9/16;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .countdown { font-size: 48px; font-weight: 700; color: var(--accent) }
+    .row { display: flex; gap: 8px; align-items: center; justify-content: center }
+
+    footer { margin-top: 18px; text-align: center; color: #a06886; font-size: 13px }
+
+    /* Last page */
+    .ending {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-size: 2em;
+      color: var(--accent);
+      text-shadow: 0 3px 8px rgba(255,77,166,0.3);
+    }
+
+    @media (max-width:600px) {
+      .gif-wrap { width: 260px; height: 260px }
+      .stamp { width: 140px; height: 140px }
+      .cry-gif { height: 200px }
+      h1.title { font-size: 26px }
+      .video-wrap { max-width: 90% }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- PAGE 1 -->
+    <section id="page1" class="page active">
+      <div class="card">
+        <h1 class="title">Happy Birthday Michelle 🎀</h1>
+        <p class="lead">ini birthday present aku buat kamu</p>
+        <div class="gif-wrap"><img src="Excited Happy Birthday GIF by KIKI.gif" alt="birthday gif"></div>
+        <p style="font-weight:700;font-size:20px;margin-top:8px">Happy Birthday Michelle</p>
+        <p class="muted">(Ketuk tombol di bawah untuk lihat sesuatu yang spesial 🥹)</p>
+        <div style="margin-top:18px"><button class="btn" id="toPage2">Next</button></div>
+      </div>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section id="page2" class="page">
+      <div class="letter-card">
+        <div class="letter-preview" id="choiceArea">
+          <div class="stamp"><img src="Desain tanpa judul.png" alt="letter preview"></div>
+          <h3 style="margin:0;color:var(--accent)">Ini surat dari aku — BUKAA YAAA!!</h3>
+          <p class="small-note">"From Bram to Michelle"</p>
+          <div class="actions">
+            <button class="btn" id="openLetterBtn">Open it</button>
+            <button class="btn" id="notNowBtn" style="background:linear-gradient(90deg,#ffd6ea,#ffb6da)">Gak dulu ah</button>
+          </div>
+        </div>
+
+        <div id="cryArea" class="cry-area" style="display:none;">
+          <div class="cry-gif"><img src="Sad Monsters Inc GIF by filmeditor.gif" alt="cry gif"></div>
+          <p style="font-weight:700;margin-top:8px">PLEASEE DIBUKA OKEYYY, PLEASEE!! 😭💌</p>
+          <button class="btn" id="backChoose" style="margin-top:10px;background:linear-gradient(90deg,#ffd6ea,#ffb6da)">Kembali ke pilihan</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL SURAT -->
+    <div id="modalBackdrop" class="modal-backdrop">
+      <div class="modal" role="dialog" aria-modal="true">
+        <button class="close-x" id="closeModal">✕</button>
+        <h2>Happy Birthday Michelle — My BRO 💖</h2>
+        <div class="modal-body">
+          <p>Ya surat aku buat kamu... Aku harap di umur kamu yang masih muda ini—eh, gak deh, udah TUAA WOKWOOWWOWOWO—kamu tambah dewasa, baik secara sikap, mental, dan juga psikis hehehehehe....</p>
+          <p>Semoga di umur yang baru ini kamu makin banyak dikelilingin orang-orang yang sayang sama kamu dan cinta sama kamu. Aku yakin banget banyak orang di luar sana yang lope sama u, jadi gunain rasa sayang itu buat jadi semangat kamu buat jalanin kegiatan-kegiatan kamu OKEEYY 💕</p>
+          <p>Sebenernya yang paling penting tuh aku pengen kamu sehat. Pikiran yang sehat menghasilkan tubuh yang kuat. Mungkin selama kamu di umur 18 awal belum ada aku yang siap mendengar segala cerita kamu, tapi di umur 19 kamu ini aku harap aku bisa jadi orang yang kamu gak segan-segan buat ajak komunikasi (aku bukan si Baek Yi Jin kok yang minus komunikasi wokokowkowk 😆)</p>
+          <p>Last thing, I hope all of the best things come for u in this new age. Welcome to 19, chellll 💗🎉</p>
+
+          <hr style="margin-top:24px">
+          <div class="checkbox-row">
+            <input type="checkbox" id="readCheckbox">
+            <label for="readCheckbox">Aku udah baca semuanya 💕</label>
+          </div>
+        </div>
+        <div style="text-align:right;margin-top:12px">
+          <button class="collect-btn" id="collectBtn">Collect Gift</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <section id="page3" class="page">
+      <div class="card">
+        <h1 class="title">🎂 Make a Wishh 🎂</h1>
+        <p class="lead">Tutup mata, pikirin keinginanmu, dan siap tiup lilinnya ya 💖</p>
+
+        <div class="cake-wrap">
+          <div class="video-wrap">
+            <video id="cakeVideo" src="Desain tanpa judul.mp4" autoplay loop muted playsinline></video>
+          </div>
+
+          <div class="countdown" id="countdown">10</div>
+          <div class="row">
+            <button class="btn" id="startCountdown">Mulai Hitung Mundur</button>
+            <button class="btn" id="blowBtn" disabled style="background:linear-gradient(90deg,#ffd6ea,#ffb6da)">Blow Candle</button>
+          </div>
+          <p class="muted">Tombol "Blow Candle" akan aktif setelah countdown selesai 🎂</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 4 (ending) -->
+    <section id="page4" class="page">
+      <div class="ending">
+        <h1>Selamat tambah tua, Michelle 🎉</h1>
+        <p style="font-size:20px;color:#ff79c6;">— Dari Bram</p>
+      </div>
+    </section>
+
+    <footer>Made with ❤️ untuk Michelle</footer>
+  </div>
+
+  <script>
+    const pages = [...document.querySelectorAll('.page')];
+    const toPage2 = document.getElementById('toPage2');
+    const openLetterBtn = document.getElementById('openLetterBtn');
+    const notNowBtn = document.getElementById('notNowBtn');
+    const choiceArea = document.getElementById('choiceArea');
+    const cryArea = document.getElementById('cryArea');
+    const backChoose = document.getElementById('backChoose');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const closeModal = document.getElementById('closeModal');
+    const readCheckbox = document.getElementById('readCheckbox');
+    const collectBtn = document.getElementById('collectBtn');
+    const countdownEl = document.getElementById('countdown');
+    const startCountdown = document.getElementById('startCountdown');
+    const blowBtn = document.getElementById('blowBtn');
+
+    function showPage(n) {
+      pages.forEach(p => p.classList.remove('active'));
+      pages[n - 1].classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    toPage2.onclick = () => showPage(2);
+
+    notNowBtn.onclick = () => {
+      cryArea.style.display='block';
+      choiceArea.style.display='none';
+    };
+
+    backChoose.onclick = () => {
+      cryArea.style.display='none';
+      choiceArea.style.display='flex';
+    };
+
+    openLetterBtn.onclick = () => {
+      modalBackdrop.style.display='flex';
+      document.querySelector('.modal-body').scrollTop = 0;
+    };
+
+    closeModal.onclick = () => modalBackdrop.style.display='none';
+    modalBackdrop.onclick = e => { if(e.target===modalBackdrop) modalBackdrop.style.display='none'; };
+
+    readCheckbox.onchange = () => {
+      if(readCheckbox.checked){
+        collectBtn.classList.add('enabled');
+        collectBtn.removeAttribute('disabled');
+      } else {
+        collectBtn.classList.remove('enabled');
+        collectBtn.setAttribute('disabled','disabled');
+      }
+    };
+
+    collectBtn.onclick = () => {
+      if(!readCheckbox.checked) return;
+      modalBackdrop.style.display='none';
+      showPage(3);
+    };
+
+    let countdown = 10, intervalId = null;
+    countdownEl.textContent = countdown;
+
+    startCountdown.onclick = () => {
+      if(intervalId) return;
+      countdown = 10;
+      countdownEl.textContent = countdown;
+      startCountdown.disabled = true;
+      intervalId = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = countdown;
+        if(countdown <= 0) {
+          clearInterval(intervalId);
+          intervalId = null;
+          blowBtn.disabled = false;
+          blowBtn.classList.add('enabled');
+          startCountdown.disabled = false;
+        }
+      }, 1000);
+    };
+
+    blowBtn.onclick = () => {
+      blowBtn.disabled = true;
+      blowBtn.textContent = 'Yayy! Lilin Mati 🎉';
+      setTimeout(() => showPage(4), 2000);
+    };
+  </script>
+</body>
+</html>
